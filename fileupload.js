@@ -13,7 +13,8 @@ app.get('/', (req,res) => {
 
 })
 
-app.post('/', (req,res) => {
+app.post('/', upload.single('fileInput'), (req,res) => {
+  console.log(req.body)
   res.send('You posted')
 })
 

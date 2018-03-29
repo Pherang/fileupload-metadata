@@ -5,7 +5,7 @@ html
   body
     h2= message
     | Enter a file: 
-    form(method='post') 
+    form(method='post' enctype='multipart/form-data') 
       input(type='file' id='fileInput')
       br
       input(type='submit' id='submitButton')
