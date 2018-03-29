@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h2= message
+    | Enter a file: 
+    form(method='post') 
+      input(type='file' id='fileInput')
+      br
+      input(type='submit' id='submitButton')
