@@ -1,5 +1,7 @@
 const express = require('express'),
       //filesystem = require('file-system'),
+      multer = require('multer'),
+      upload = multer( { dest: 'uploads/'} ),
       app = express()
 
 app.set('views', './views')
@@ -13,7 +15,7 @@ app.get('/', (req,res) => {
 
 app.post('/', (req,res) => {
   res.send('You posted')
-}
+})
 
 app.listen(8080, () => {
   console.log('Server listening on 8080')
