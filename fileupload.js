@@ -1,6 +1,7 @@
 const express = require('express'),
       multer = require('multer'),
       upload = multer( { storage: storage} ),
+      appPort = process.env.PORT || 8080,
       app = express()
 
 app.set('views', './views')
@@ -16,7 +17,6 @@ var storage = multer.diskStorage({
   }
 })
 
-
 app.get('/', (req,res) => {
   res.render('index', { title: 'Hello!', message: 'Choose a file to upload'} )
 })
@@ -26,6 +26,6 @@ app.post('/', upload.single('filename'), (req,res,next) => {
   res.send(JSON.stringify(uploadResults, null, 2))
 })
 
-app.listen(8080, () => {
-  console.log('Server listening on 8080')
+app.listen(appPort, () => {
+  console.log('Server listening on ' + appPort)
 })
