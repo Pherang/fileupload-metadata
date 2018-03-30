@@ -1,21 +1,29 @@
 const express = require('express'),
-      //filesystem = require('file-system'),
       multer = require('multer'),
-      upload = multer( { dest: 'uploads/'} ),
+      upload = multer( { storage: storage} ),
       app = express()
 
 app.set('views', './views')
-app.set('view engine', 'pug')
+app.set('view engine', 'pug') // Pug might be overkill for this but wanted to start learning an engine
 
-app.get('/', (req,res) => {
-  
-  res.render('index', { title: 'Hello!', message: 'Choose a file to upload'} )
-
+// Wanted to have file names stored with original name.
+var storage = multer.diskStorage({
+  destination: function(req,file,cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req,file,cb) {
+    cb(null, file.originalname + '-' + Date.now()) 
+  }
 })
 
-app.post('/', upload.single('fileInput'), (req,res) => {
-  console.log(req.body)
-  res.send('You posted')
+
+app.get('/', (req,res) => {
+  res.render('index', { title: 'Hello!', message: 'Choose a file to upload'} )
+})
+
+app.post('/', upload.single('filename'), (req,res,next) => {
+  let uploadResults = { 'size': req.file.size }
+  res.send(JSON.stringify(uploadResults, null, 2))
 })
 
 app.listen(8080, () => {

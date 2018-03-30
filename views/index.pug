@@ -6,6 +6,6 @@ html
     h2= message
     | Enter a file: 
     form(method='post' enctype='multipart/form-data') 
-      input(type='file' id='fileInput')
+      input(type='file' name='filename' id='fileInput')
       br
       input(type='submit' id='submitButton')
